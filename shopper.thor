@@ -3,6 +3,8 @@ require 'nokogiri'
 require 'open-uri'
 require 'mail'
 
+$stdout.sync = true
+
 Mail.defaults do
   delivery_method :smtp, {
     :address => 'smtp.sendgrid.net',
