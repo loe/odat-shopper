@@ -24,9 +24,9 @@ class Shopper < Thor
     puts "Shopping for #{pattern} on #{URL}."
     regexp = Regexp.new(pattern, true) # Second argument makes Regexp case insensitive.
     doc = Nokogiri::XML(open(URL))
-    doc.xpath('//item').select do |item|
-      item.xpath('title').inner_text =~ regexp
-    end.map do |item|
+    item = doc.xpath('//item').first
+
+    if item.xpath('title').inner_text =~ regexp
       subject = item.xpath('title').inner_text
       link = item.xpath('link').inner_text
       puts "Sending mail about #{subject}"
