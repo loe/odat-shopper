@@ -1,1 +1,1 @@
-worker: bundle exec ruby shopper.rb
+worker: bundle exec thor shopper:shop
