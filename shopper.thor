@@ -7,7 +7,9 @@ class Shopper < Thor
   URL = ENV['RSS_URL']
 
   desc "shop", "Find sweet deals that match REGEX."
-  def shop(pattern = '.*')
+  def shop(pattern = ENV['PATTERN'])
+    pattern ||= '.*'
+    puts "Shopping for #{pattern} on #{URL}."
     regexp = Regexp.new(pattern, true) # Second argument makes Regexp case insensitive.
     doc = Nokogiri::XML(open(URL))
     doc.xpath('//item').select do |item|
